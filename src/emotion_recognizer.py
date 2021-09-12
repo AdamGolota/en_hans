@@ -7,7 +7,7 @@ import cv2
 class CVEmotionRecognizer:
     def get_video_emotion(self, video_path: str):
         xception = load_model(f'{EMOTION_MODEL_PATH}/final_xception.h5')
-        xception.compile(optimizer='adam?', loss='categorical_crossentropy', metrics=['accuracy'])
+        xception.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
         cap = cv2.VideoCapture(video_path)
 
