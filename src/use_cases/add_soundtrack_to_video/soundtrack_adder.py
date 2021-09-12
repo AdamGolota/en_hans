@@ -29,7 +29,7 @@ class SoundtrackAdder:
         emotion = self._get_video_emotion()
         self._generate_music(emotion)
         self._attach_music_to_original_video()
-        self._create_new_soundtrack_record()
+        self._create_new_soundtrack_db_record()
         self._upload_video_with_music()
         return self.composition_id
 
@@ -38,7 +38,9 @@ class SoundtrackAdder:
         blob.download_to_filename(self._original_video_temp_filename)
 
     def _get_video_emotion(self):
-        return self.emotion_recognizer.get_video_emotion(self._original_video_temp_filename)
+        emotion = self.emotion_recognizer.get_video_emotion(self._original_video_temp_filename)
+        print(emotion)
+        return emotion
 
     def _generate_music(self, emotion):
         playlist = self.playlist_suggester.suggest_playlist(emotion)
@@ -63,7 +65,7 @@ class SoundtrackAdder:
             self.video_clip.rotation = 0
         self.video_clip.write_videofile(self._composition_temp_filename)
 
-    def _create_new_soundtrack_record(self):
+    def _create_new_soundtrack_db_record(self):
         engine.execute(f'INSERT INTO `soundtrack` (`raw_video_id`) VALUES ("{self.raw_video_id}")')
         composition_id = engine.execute('SELECT LAST_INSERT_ID()').scalar()
         self.composition_id = str(composition_id)
