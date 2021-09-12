@@ -3,14 +3,10 @@ from typing import BinaryIO
 import numpy as np
 from keras.models import load_model
 import cv2
-from numba import cuda 
 
 
 class CVEmotionRecognizer:
     def get_video_emotion(self, video_path: str):
-        device = cuda.get_current_device()
-        device.reset()
-
         xception = load_model(f'{EMOTION_MODEL_PATH}/final_xception.h5')
         xception.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -38,7 +34,6 @@ class CVEmotionRecognizer:
             y = np.expand_dims(gray_image, axis=-1)
             y = np.expand_dims(y, axis=0)
             pred = xception.predict(y)
-            print(pred)
             fin_pred = np.append(fin_pred,pred,axis=0)
 
             if cv2.waitKey(1) == ord('q'):
