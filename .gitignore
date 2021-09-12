@@ -9,6 +9,7 @@ debug.py
 gcs.json
 /data
 /keys.py
+/env.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

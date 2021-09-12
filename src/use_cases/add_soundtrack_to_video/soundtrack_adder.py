@@ -1,3 +1,4 @@
+from env import TEMP_FILES_DIR
 import re
 import tempfile
 from moviepy.editor import AudioFileClip, CompositeAudioClip, VideoFileClip
@@ -80,12 +81,12 @@ class SoundtrackAdder:
 
     @property
     def _raw_video_temp_filename(self):
-        return f'/Users/adamgolota/en_hans_video-{self.raw_video_id}.{self.extension}'
+        return f'{TEMP_FILES_DIR}/en_hans_video-{self.raw_video_id}.{self.extension}'
 
     @property
     def _music_temp_filename(self):
-        return f'/Users/adamgolota/en_hans_music-{self.raw_video_id}.mp3'
+        return f'{TEMP_FILES_DIR}/en_hans_music-{self.raw_video_id}.mp3'
 
     @property
     def _composition_temp_filename(self):
-        return f'/Users/adamgolota/en_hans_composition-{self.raw_video_id}.{self.extension}'
+        return f'{TEMP_FILES_DIR}/en_hans_composition-{self.raw_video_id}.{self.extension}'
