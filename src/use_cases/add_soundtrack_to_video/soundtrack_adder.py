@@ -52,7 +52,7 @@ class SoundtrackAdder:
 
     def _attach_music_to_original_video(self):
         music_clip = AudioFileClip(self._music_temp_filename)
-        music_clip = music_clip.fx(volumex, 0.5)
+        music_clip = music_clip.fx(volumex, 0.75)
         composite_audio = CompositeAudioClip([self.video_clip.audio, music_clip]) if self.video_clip.audio else music_clip
         self.video_clip = self.video_clip.set_audio(composite_audio)
         self._save_composition()
