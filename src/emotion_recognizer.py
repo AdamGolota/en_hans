@@ -1,5 +1,6 @@
 from env import EMOTION_MODEL_PATH
 from typing import BinaryIO
+from flask import g
 import numpy as np
 from keras.models import load_model
 import cv2
@@ -7,8 +8,9 @@ import cv2
 
 class CVEmotionRecognizer:
     def get_video_emotion(self, video_path: str):
-        xception = load_model(f'{EMOTION_MODEL_PATH}/final_xception.h5')
-        xception.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+        if 'xception' not in g:
+            g.xception = load_model(f'{EMOTION_MODEL_PATH}/final_xception.h5')
+        g.xception.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
         cap = cv2.VideoCapture(video_path)
 
@@ -33,7 +35,7 @@ class CVEmotionRecognizer:
             gray_image = cv2.cvtColor(new_frame, cv2.COLOR_BGR2GRAY)
             y = np.expand_dims(gray_image, axis=-1)
             y = np.expand_dims(y, axis=0)
-            pred = xception.predict(y)
+            pred = g.xception.predict(y)
             fin_pred = np.append(fin_pred,pred,axis=0)
 
             if cv2.waitKey(1) == ord('q'):

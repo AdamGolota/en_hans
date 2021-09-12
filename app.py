@@ -15,7 +15,6 @@ app = Flask(__name__)
 @app.route('/upload-video', methods=['POST'])
 def upload_video():
     res = upload_video_flask()
-    gc.collect()
     return res
 
 
