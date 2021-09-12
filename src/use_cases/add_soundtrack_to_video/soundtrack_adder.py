@@ -1,6 +1,4 @@
 from env import TEMP_FILES_DIR
-import re
-import tempfile
 from moviepy.editor import AudioFileClip, CompositeAudioClip, VideoFileClip
 
 import requests
