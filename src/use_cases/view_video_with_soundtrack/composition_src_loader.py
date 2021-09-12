@@ -1,4 +1,5 @@
 from db import engine
+from src.use_cases.add_soundtrack_to_video.soundtrack_adder import COMPOSITION_EXT
 
 
 class CompositionSrcLoader():
@@ -6,12 +7,12 @@ class CompositionSrcLoader():
         pass
 
     def get_video_with_soundtrack(self, composition_id: str):
-        extention = self._get_extention(composition_id)
-        return f'https://storage.cloud.google.com/en-hans/with_music/{composition_id}.{extention}.'
+        extension = self._get_extension(composition_id)
+        return f'https://storage.cloud.google.com/en-hans/with_music/{composition_id}.{COMPOSITION_EXT}'
 
-    def _get_extention(self, composition_id: str):
+    def _get_extension(self, composition_id: str):
         return engine.execute(f"""
-            SELECT `extention`
+            SELECT `extension`
             FROM `raw_video`
             INNER JOIN `soundtrack` USING (`raw_video_id`)
             WHERE `soundtrack_id` = {composition_id}""").scalar()
