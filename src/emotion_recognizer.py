@@ -5,13 +5,11 @@ from keras.models import load_model
 import cv2
 
 class CVEmotionRecognizer:
-    def get_video_emotion(self, video_path: BinaryIO):
-        self.video = video_path
-
+    def get_video_emotion(self, video_path: str):
         xception = load_model(f'{EMOTION_MODEL_PATH}/final_xception.h5')
-        xception.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+        xception.compile(optimizer='adam?', loss='categorical_crossentropy', metrics=['accuracy'])
 
-        cap = cv2.VideoCapture(self.video)
+        cap = cv2.VideoCapture(video_path)
 
         fin_pred = np.empty((0,7), float)
 

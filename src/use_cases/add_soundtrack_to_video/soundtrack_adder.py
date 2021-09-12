@@ -38,8 +38,7 @@ class SoundtrackAdder:
         blob.download_to_filename(self._original_video_temp_filename)
 
     def _get_video_emotion(self):
-        with open(self._original_video_temp_filename) as video:
-            return self.emotion_recognizer.get_video_emotion(video)
+        return self.emotion_recognizer.get_video_emotion(self._original_video_temp_filename)
 
     def _generate_music(self, emotion):
         playlist = self.playlist_suggester.suggest_playlist(emotion)
