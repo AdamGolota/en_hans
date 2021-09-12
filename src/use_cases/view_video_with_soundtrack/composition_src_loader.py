@@ -8,7 +8,7 @@ class CompositionSrcLoader():
 
     def get_video_with_soundtrack(self, composition_id: str):
         extension = self._get_extension(composition_id)
-        return f'https://storage.cloud.google.com/en-hans/with_music/{composition_id}.{COMPOSITION_EXT}'
+        return f'https://storage.googleapis.com/en-hans/with_music/{composition_id}.{COMPOSITION_EXT}'
 
     def _get_extension(self, composition_id: str):
         return engine.execute(f"""
