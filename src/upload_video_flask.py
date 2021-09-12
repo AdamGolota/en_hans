@@ -14,7 +14,7 @@ def upload_video_flask():
         extension=extension[1:]
     ))
     soundtrack_adder = init_soundtrack_adder()
-    composition_id = init_soundtrack_adder().add_soundtrack_to_video(raw_video_id)
+    composition_id = soundtrack_adder.add_soundtrack_to_video(raw_video_id)
     return {
         'src': CompositionSrcLoader().get_video_with_soundtrack(composition_id),
         'emotion': soundtrack_adder.emotion
