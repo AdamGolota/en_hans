@@ -15,6 +15,7 @@ class SoundtrackAdder:
         self.composition_id = None
         self.original_extension = None
         self.video_clip = None
+        self.emotion = None
         self.emotion_recognizer = emotion_recognizer
         self.playlist_suggester = playlist_suggester
         self.music_generator = music_generator
@@ -23,8 +24,8 @@ class SoundtrackAdder:
         self.raw_video_id = raw_video_id
         self.original_extension = self._get_original_extension()
         self._download_original_video()
-        emotion = self._get_video_emotion()
-        self._generate_music(emotion)
+        self.emotion = self._get_video_emotion()
+        self._generate_music(self.emotion)
         self._attach_music_to_original_video()
         self._create_new_soundtrack_db_record()
         self._upload_video_with_music()

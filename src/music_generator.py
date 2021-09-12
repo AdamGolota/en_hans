@@ -5,12 +5,12 @@ import math
 from keys import MUBERT_PAT
 
 class MubertMusicGenerator:
-    def generate_music(self, channel, duration):
+    def generate_music(self, playlist, duration):
         res = requests.post('https://api-b2b.mubert.com/v2/RecordTrack', json={
             "method":"RecordTrack",
             "params": {
                 "pat": MUBERT_PAT,
-                "playlist":"0.2.3", "duration": math.ceil(duration),
+                "playlist":playlist, "duration": math.ceil(duration),
                 "format":"mp3", "intensity":"medium",
                 "bitrate":"32",
                 "mode":"track"
