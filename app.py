@@ -1,7 +1,7 @@
 """Flask App
 Тут инициализируется Flask приложение.
 """
-
+import gc
 from src.generate_audio_flask import generate_audio_flask
 from flask import Flask
 
@@ -14,7 +14,10 @@ app = Flask(__name__)
 
 @app.route('/upload-video', methods=['POST'])
 def upload_video():
-    return upload_video_flask()
+    res = upload_video_flask()
+    gc.collect()
+    return res
+
 
 @app.route('/generate-audio', methods=['POST'])
 def generate_audio():
