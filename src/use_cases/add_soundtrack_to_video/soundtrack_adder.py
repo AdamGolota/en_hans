@@ -12,7 +12,7 @@ COMPOSITION_EXT = 'mp4'
 
 
 class SoundtrackAdder:
-    def __init__(self, emotion_recognizer, playlist_suggester, music_generator, audio_attacher):
+    def __init__(self, emotion_recognizer, playlist_suggester, music_generator):
         self.bucket = init_bucket()
         self.composition_id = None
         self.original_extension = None
@@ -20,7 +20,6 @@ class SoundtrackAdder:
         self.emotion_recognizer = emotion_recognizer
         self.playlist_suggester = playlist_suggester
         self.music_generator = music_generator
-        self.audio_attacher = audio_attacher
 
     def add_soundtrack_to_video(self, raw_video_id: str):
         self.raw_video_id = raw_video_id
