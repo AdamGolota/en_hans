@@ -10,6 +10,7 @@ gcs.json
 /data
 /keys.py
 /env.py
+final_xception.h5
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

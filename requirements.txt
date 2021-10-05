@@ -1,6 +1,8 @@
 absl-py==0.13.0
 astroid==2.7.3
 astunparse==1.6.3
+azure-cognitiveservices-vision-face==0.5.0
+azure-common==1.1.27
 botocore==1.21.40
 cachetools==4.2.2
 certifi==2021.5.30
@@ -27,6 +29,7 @@ h5py==3.1.0
 idna==3.2
 imageio==2.9.0
 imageio-ffmpeg==0.4.5
+isodate==0.6.0
 isort==5.9.3
 itsdangerous==2.0.1
 Jinja2==3.0.1
@@ -39,6 +42,7 @@ Markdown==3.3.4
 MarkupSafe==2.0.1
 mccabe==0.6.1
 moviepy==1.0.3
+msrest==0.6.21
 mysql-connector-python==8.0.26
 numba==0.54.0
 numpy==1.19.5
