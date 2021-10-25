@@ -1,11 +1,12 @@
-from env import EMOTION_MODEL_PATH
-from typing import BinaryIO
-import numpy as np
 from tensorflow import keras
+
 import cv2
+import numpy as np
+from env import EMOTION_MODEL_PATH
+from src.use_cases.add_soundtrack_to_video.emotion_recognizer import EmotionRecognizer
 
 
-class CVEmotionRecognizer:
+class OpensourceEmotionRecognizer(EmotionRecognizer):
     def get_video_emotion(self, video_path: str):
         xception = keras.models.load_model(f'{EMOTION_MODEL_PATH}/final_xception.h5')
         xception.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
