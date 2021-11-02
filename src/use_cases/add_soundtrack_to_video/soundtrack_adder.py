@@ -1,19 +1,21 @@
-from time import time
-from env import TEMP_FILES_DIR
-from moviepy.editor import AudioFileClip, CompositeAudioClip, VideoFileClip
-from moviepy.audio.fx.volumex import volumex
-import requests
-from src.init_bucket import init_bucket
+from time import sleep, time
 
+import requests
+from moviepy.audio.fx.volumex import volumex
+from moviepy.editor import AudioFileClip, CompositeAudioClip, VideoFileClip
+from src.init_bucket import init_bucket
+from src.use_cases.add_soundtrack_to_video.emotion_recognizer import \
+    EmotionRecognizer
+from env import TEMP_FILES_DIR
 
 COMPOSITION_EXT = 'mp4'
 
 
 class SoundtrackAdder:
-    def __init__(self, emotion_recognizer, playlist_suggester, music_generator):
+    def __init__(self, emotion_recognizer: EmotionRecognizer, playlist_suggester, music_generator):
         self.bucket = init_bucket()
         self.original_video_url = None
-        self.original_extension = None
+        self.original_extension = 'mp4'
         self.video_clip = None
         self.emotion = None
         self.mix_id = None
@@ -30,7 +32,7 @@ class SoundtrackAdder:
         self._attach_music_to_original_video()
         self._upload_video_with_music()
         return self.mix_id
-    
+
     def _generate_timestamp_id(self):
         return int(time())
 
@@ -49,14 +51,16 @@ class SoundtrackAdder:
         music_url = self.music_generator.generate_music(playlist, length)
         with open(self._music_temp_filename, 'wb') as music_file:
             music_file.write(self._download_music(music_url))
-    
+
     def _download_music(self, music_url):
+        sleep(5)
         return requests.get(music_url).content
 
     def _attach_music_to_original_video(self):
         music_clip = AudioFileClip(self._music_temp_filename)
         music_clip = music_clip.fx(volumex, 0.75)
-        composite_audio = CompositeAudioClip([self.video_clip.audio, music_clip]) if self.video_clip.audio else music_clip
+        composite_audio = (CompositeAudioClip([self.video_clip.audio, music_clip]) if self.video_clip.audio
+                                                                                   else music_clip)
         self.video_clip = self.video_clip.set_audio(composite_audio)
         self._save_composition()
 

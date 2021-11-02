@@ -19,7 +19,7 @@ POSSIBLE_EMOTIONS = ['anger', 'contempt', 'disgust', 'fear',
 NUMBER_OF_FRAMES_TO_ANALYZE = 3
 
 class AzureEmotionRecognizer(EmotionRecognizer):
-    def __init__(self, video_cutter: VideoCutter) -> None:
+    def __init__(self, video_cutter: VideoCutter):
         self.video_cutter = video_cutter
         self.face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(AZURE_KEY))
 
